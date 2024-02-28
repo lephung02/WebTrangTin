@@ -57,7 +57,7 @@
                                     <a href="index.php"><img src="assets/img/logo/logo.png" alt=""></a>
                                 </div>
                             </div>
-<?php include("banner.php") ?>
+                            <?php include("banner.php") ?>
                         </div>
                    </div>
                 </div>
@@ -80,7 +80,6 @@
                                             <li><a href="contact.php">Contact</a></li>
                                             <li><a href="#">Pages</a>
                                                 <ul class="submenu">
-                                                    <li><a href="elements.php">Element</a></li>
                                                     <li><a href="blog.php">Blog</a></li>
                                                     <li><a href="single-blog.php">Blog Details</a></li>
                                                     <li><a href="details.php">Categori Details</a></li>
