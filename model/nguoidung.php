@@ -158,8 +158,8 @@ class NGUOIDUNG
 VALUES(:HoTen, :TenDN, :MatKhau, :Email, :NgaySinh, :GioiTinh, :QuyenND, :NgayDK, :TrangThai)";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':HoTen', $nguoidung->HoTen);
-            $cmd->bindValue(':TenDN', md5($nguoidung->TenDN));
-            $cmd->bindValue(':MatKhau', $nguoidung->MatKhau);
+            $cmd->bindValue(':TenDN', $nguoidung->TenDN);
+            $cmd->bindValue(':MatKhau', md5($nguoidung->MatKhau));
             $cmd->bindValue(':Email', $nguoidung->Email);
             $cmd->bindValue(':NgaySinh', $nguoidung->NgaySinh);
             $cmd->bindValue(':GioiTinh', $nguoidung->GioiTinh);

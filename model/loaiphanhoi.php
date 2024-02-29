@@ -1,33 +1,24 @@
 <?php
-class BINHCHON
+class LOAIPHANHOI
 {
-    private $MaBC;
-    private $MaND;
-    private $DanhGia;
+    private $MaLPH;
+    private $TenLPH;
     
-    public function getMaBC()
+    public function getMaLPH()
     {
-        return $this->MaBC;
+        return $this->MaLPH;
     }
-    public function setMaBC($value)
+    public function setMaLPH($value)
     {
-        $this->MaBC = $value;
+        $this->MaLPH = $value;
     }
-    public function getMaND()
+    public function getTenLPH()
     {
-        return $this->MaND;
+        return $this->TenLPH;
     }
-    public function setMaND($value)
+    public function setTenLPH($value)
     {
-        $this->MaND = $value;
-    }
-    public function getDanhGia()
-    {
-        return $this->DanhGia;
-    }
-    public function setDanhGia($value)
-    {
-        $this->DanhGia = $value;
+        $this->TenLPH = $value;
     }
     // khai báo các thuộc tính (SV tự viết)
 
@@ -52,11 +43,11 @@ class BINHCHON
     // }
 
     // lấy tất cả ng dùng
-    public function laydanhsachbinhchon()
+    public function laydanhsachloaiphanhoi()
     {
         $db = DATABASE::connect();
         try {
-            $sql = "SELECT * FROM binhchon";
+            $sql = "SELECT * FROM loaiphanhoi";
             $cmd = $db->prepare($sql);
             $cmd->execute();
             $ketqua = $cmd->fetchAll();
@@ -69,18 +60,17 @@ class BINHCHON
     }
     // Thêm ng dùng mới, trả về khóa của dòng mới thêm
     // (SV nên truyền tham số là 1 đối tượng kiểu người dùng, không nên truyền nhiều tham số rời rạc như thế này)
-    public function thembinhchon($binhchon)
+    public function themloaiphanhoi($loaiphanhoi)
     {
         $db = DATABASE::connect();
         try {
-            $sql = "INSERT INTO binhchon(MaND, DanhGia) 
-VALUES(:MaND, :DanhGia)";
+            $sql = "INSERT INTO loaiphanhoi(TenLPH) 
+VALUES(:TenLPH)";
             $cmd = $db->prepare($sql);
-            $cmd->bindValue(':MaND', $binhchon->MaND);
-            $cmd->bindValue(':DanhGia', $binhchon->DanhGia);
+            $cmd->bindValue(':TenLPH', $loaiphanhoi->TenLPH);
             $cmd->execute();
-            $MaBC = $db->lastInsertMaBC();
-            return $MaBC;
+            $MaLPH = $db->lastInsertMaLPH();
+            return $MaLPH;
         } catch (PDOException $e) {
             $error_message = $e->getMessage();
             echo "<p>Lỗi truy vấn: $error_message</p>";
@@ -89,15 +79,14 @@ VALUES(:MaND, :DanhGia)";
     }
     // Cập nhật thông tin ng dùng: họ tên, số đt, email, ảnh đại diện 
     // (SV nên truyền tham số là 1 đối tượng kiểu người dùng, không nên truyền nhiều tham số rời rạc như thế này)
-    public function capnhatbinhchon($MaBC,$MaND, $DanhGia)
+    public function capnhatloaiphanhoi($MaLPH,$TenLPH)
     {
         $db = DATABASE::connect();
         try {
-            $sql = "UPDATE binhchon set MaND=:MAND, DanhGia=:DanhGia  where MaBC=MaBC";
+            $sql = "UPDATE loaiphanhoi set TenLPH=:TenLPH  where MaLPH=MaLPH";
             $cmd = $db->prepare($sql);
-            $cmd->bindValue('MaBC', $MaBC);
-            $cmd->bindValue(':MaND', $MaND);
-            $cmd->bindValue(':DanhGia', $DanhGia);
+            $cmd->bindValue('MaLPH', $MaLPH);
+            $cmd->bindValue(':TenLPH', $TenLPH);
             $ketqua = $cmd->execute();
             return $ketqua;
         } catch (PDOException $e) {
@@ -124,13 +113,13 @@ VALUES(:MaND, :DanhGia)";
     //     }
     // }
     // // Đổi trạng thái (0 khóa, 1 kích hoạt)
-    // public function doitrangthai($MaND, $TrangThai)
+    // public function doitrangthai($TenLPH, $TrangThai)
     // {
     //     $db = DATABASE::connect();
     //     try {
-    //         $sql = "UPDATE baiviet set TrangThai=:TrangThai where MaND=:MaND";
+    //         $sql = "UPDATE baiviet set TrangThai=:TrangThai where TenLPH=:TenLPH";
     //         $cmd = $db->prepare($sql);
-    //         $cmd->bindValue(':MaND', $MaND);
+    //         $cmd->bindValue(':TenLPH', $TenLPH);
     //         $cmd->bindValue(':TrangThai', $TrangThai);
     //         $ketqua = $cmd->execute();
     //         return $ketqua;
